@@ -1,5 +1,7 @@
 package com.example.user.api.simpleuserservice;
 
+import com.example.user.api.simpleuserservice.exceptions.EntityNotFoundException;
+
 import java.util.List;
 import java.util.Map;
 
@@ -7,7 +9,7 @@ public interface IUserService<T, ID extends String> {
 
     List<T> findAll();
 
-    List<T> findById(ID id);
+    T findById(ID id) throws EntityNotFoundException;;
 
     <S extends T> List<S> saveAll(Iterable<S> var1);
 
