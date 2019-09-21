@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -31,5 +32,11 @@ public class UserController {
     @PostMapping
     public User createUser(@Valid @RequestBody User user){
         return userService.save(user);
+    }
+
+
+    @DeleteMapping("{id}")
+    public User deleteUser(@PathVariable String id) throws EntityNotFoundException{
+        return userService.delete(id);
     }
 }

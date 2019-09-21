@@ -28,26 +28,28 @@ public class UserService implements IUserService<User, String>{
                 .orElseThrow(() -> new EntityNotFoundException(id, User.class));
     }
 
-
-
     @Override
     public <S extends User> List<S> saveAll(Iterable<S> var1) {
         return null;
     }
 
     @Override
-    public User delete(String var1) {
-        return null;
+    public <S extends User> S save(S user) {
+        return this.userRepository.save(user);
     }
+    
+
+    @Override
+    public User delete(String id) throws EntityNotFoundException {
+        User user = findById(id);
+        userRepository.delete(user);
+        return user;
+    }
+
 
     @Override
     public Map<String, List<User>> findAllGroupByGroupId() {
         return null;
-    }
-
-
-    public User save(User user){
-        return this.userRepository.save(user);
     }
 
 }
