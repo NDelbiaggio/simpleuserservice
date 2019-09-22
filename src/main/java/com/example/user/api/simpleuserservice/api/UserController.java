@@ -1,6 +1,8 @@
-package com.example.user.api.simpleuserservice;
+package com.example.user.api.simpleuserservice.api;
 
-import com.example.user.api.simpleuserservice.exceptions.EntityNotFoundException;
+import com.example.user.api.simpleuserservice.service.IUserService;
+import com.example.user.api.simpleuserservice.domain.User;
+import com.example.user.api.simpleuserservice.api.exceptions.EntityNotFoundException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

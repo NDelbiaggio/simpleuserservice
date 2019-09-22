@@ -1,14 +1,13 @@
-package com.example.user.api.simpleuserservice.exceptions.errorHandlers;
+package com.example.user.api.simpleuserservice.api.exceptions.errorHandlers;
 
 
-import com.example.user.api.simpleuserservice.exceptions.EntityNotFoundException;
+import com.example.user.api.simpleuserservice.api.exceptions.EntityNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @ControllerAdvice
 public class EntityNotFoundHandler {

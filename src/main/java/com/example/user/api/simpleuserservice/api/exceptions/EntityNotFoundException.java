@@ -1,4 +1,4 @@
-package com.example.user.api.simpleuserservice.exceptions;
+package com.example.user.api.simpleuserservice.api.exceptions;
 
 public class EntityNotFoundException extends Exception{
 

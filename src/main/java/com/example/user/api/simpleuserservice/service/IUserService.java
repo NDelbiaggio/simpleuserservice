@@ -1,6 +1,6 @@
-package com.example.user.api.simpleuserservice;
+package com.example.user.api.simpleuserservice.service;
 
-import com.example.user.api.simpleuserservice.exceptions.EntityNotFoundException;
+import com.example.user.api.simpleuserservice.api.exceptions.EntityNotFoundException;
 
 import java.util.List;
 import java.util.Map;

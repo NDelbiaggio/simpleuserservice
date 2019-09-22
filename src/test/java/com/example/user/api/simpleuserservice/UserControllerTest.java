@@ -1,6 +1,9 @@
 package com.example.user.api.simpleuserservice;
 
-import com.example.user.api.simpleuserservice.exceptions.EntityNotFoundException;
+import com.example.user.api.simpleuserservice.api.UserController;
+import com.example.user.api.simpleuserservice.api.exceptions.EntityNotFoundException;
+import com.example.user.api.simpleuserservice.domain.User;
+import com.example.user.api.simpleuserservice.service.IUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.Before;

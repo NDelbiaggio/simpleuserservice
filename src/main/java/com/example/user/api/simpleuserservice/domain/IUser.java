@@ -1,4 +1,4 @@
-package com.example.user.api.simpleuserservice;
+package com.example.user.api.simpleuserservice.domain;
 
 public interface IUser {
     String getId();

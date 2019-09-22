@@ -1,15 +1,17 @@
-package com.example.user.api.simpleuserservice;
+package com.example.user.api.simpleuserservice.service;
 
-import com.example.user.api.simpleuserservice.exceptions.EntityNotFoundException;
+import com.example.user.api.simpleuserservice.domain.User;
+import com.example.user.api.simpleuserservice.api.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.user.api.simpleuserservice.repository.UserRepository;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements IUserService<User, String>{
+public class UserServiceImpl implements IUserService<User, String> {
 
     private final UserRepository userRepository;
 
