@@ -42,13 +42,11 @@ public class UserControllerTest {
     private IUserService<User, String> userService;
 
     private User user;
+    ObjectMapper mapper = new ObjectMapper();
 
     @Before
     public void setUp() throws Exception {
-        user = new User();
-        user.setId("id_1");
-        user.setName("user_1");
-        user.setGroupId("group_1");
+        user = new User("id_1","user_1", "group_1");
     }
 
     @Test
@@ -81,10 +79,10 @@ public class UserControllerTest {
     @Test
     public void should_save_user_success() throws Exception {
         given((userService.save(user))).willReturn(user);
-        ObjectMapper Obj = new ObjectMapper();
+
         mockMvc.perform(post("/users")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(Obj.writeValueAsString(user))
+                .content(mapper.writeValueAsString(user))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.id", is(user.getId())))
@@ -103,10 +101,9 @@ public class UserControllerTest {
     @Test
     public void should_400_save_with_empty_groupid() throws Exception {
         user.setGroupId("");
-        ObjectMapper Obj = new ObjectMapper();
         mockMvc.perform(post("/users")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(Obj.writeValueAsString(user))
+                .content(mapper.writeValueAsString(user))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
         verify(userService, never()).save(user);
@@ -115,10 +112,9 @@ public class UserControllerTest {
     @Test
     public void should_400_save_with_empty_id() throws Exception {
         user.setId("");
-        ObjectMapper Obj = new ObjectMapper();
         mockMvc.perform(post("/users")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(Obj.writeValueAsString(user))
+                .content(mapper.writeValueAsString(user))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
         verify(userService, never()).save(user);
@@ -127,10 +123,9 @@ public class UserControllerTest {
     @Test
     public void should_400_save_with_empty_name() throws Exception {
         user.setName("");
-        ObjectMapper Obj = new ObjectMapper();
         mockMvc.perform(post("/users")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(Obj.writeValueAsString(user))
+                .content(mapper.writeValueAsString(user))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
         verify(userService, never()).save(user);
@@ -140,7 +135,6 @@ public class UserControllerTest {
     @Test
     public void should_delete_user_success() throws Exception {
         given((userService.delete(user.getId()))).willReturn(user);
-
         mockMvc.perform(delete("/users/" + user.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(user.getId())))
@@ -151,23 +145,18 @@ public class UserControllerTest {
     @Test
     public void should_404_delete_user_not_found() throws Exception {
         given((userService.delete(user.getId()))).willThrow(new EntityNotFoundException(user.getId(), User.class));
-
         mockMvc.perform(delete("/users/" + user.getId()))
                 .andExpect(status().is4xxClientError());
     }
 
     @Test
     public void should_save_all_users_success() throws Exception {
-        User user2 = new User();
-        user2.setId("id_2");
-        user2.setName("user_2");
-        user2.setGroupId("group_2");
+        User user2 = new User("id_2","user_2","group_2");
         List<User> userList = Arrays.asList(new User[]{user, user2});
         given((userService.saveAll(userList))).willReturn(userList);
-        ObjectMapper Obj = new ObjectMapper();
         mockMvc.perform(post("/users/several")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(Obj.writeValueAsString(userList))
+                .content(mapper.writeValueAsString(userList))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$", hasSize(2)));
@@ -178,7 +167,6 @@ public class UserControllerTest {
         Map<String, List<User>> map = new HashMap<>();
         map.put(user.getGroupId(), Arrays.asList(new User[]{user}));
         given((userService.findAllGroupByGroupId())).willReturn(map);
-
         mockMvc.perform(get("/users/groups"))
                 .andExpect(status().isOk());
     }
