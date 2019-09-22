@@ -2,6 +2,7 @@ package com.example.user.api.simpleuserservice;
 
 import com.example.user.api.simpleuserservice.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -32,11 +33,13 @@ public class UserController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public User createUser(@Valid @RequestBody User user){
         return userService.save(user);
     }
 
     @PostMapping("/several")
+    @ResponseStatus(HttpStatus.CREATED)
     public List<User> createUsers(@Valid @RequestBody List<User> users){
         return userService.saveAll(users);
     }

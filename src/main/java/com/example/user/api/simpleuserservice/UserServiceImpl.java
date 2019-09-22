@@ -9,12 +9,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements IUserService<User, String>{
+public class UserServiceImpl implements IUserService<User, String>{
 
     private final UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

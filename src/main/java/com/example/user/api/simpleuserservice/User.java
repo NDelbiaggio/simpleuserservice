@@ -12,12 +12,13 @@ import javax.validation.constraints.NotNull;
 public class User implements IUser{
 
     @Id
+    @NotEmpty
     String id;
 
     @NotEmpty
     String name;
 
-    @NotNull
+    @NotEmpty
     String groupId;
 
 }
