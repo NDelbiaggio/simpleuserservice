@@ -7,14 +7,16 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
+    @Autowired
     private final IUserService<User, String> userService;
 
-    @Autowired
+
     public UserController(final IUserService<User, String> userService) {
         this.userService = userService;
     }
@@ -34,9 +36,18 @@ public class UserController {
         return userService.save(user);
     }
 
+    @PostMapping("/several")
+    public List<User> createUsers(@Valid @RequestBody List<User> users){
+        return userService.saveAll(users);
+    }
 
     @DeleteMapping("{id}")
     public User deleteUser(@PathVariable String id) throws EntityNotFoundException{
         return userService.delete(id);
+    }
+
+    @GetMapping("/groups")
+    public Map<String, List<User>> getGroupByGroupId(){
+        return userService.findAllGroupByGroupId();
     }
 }
