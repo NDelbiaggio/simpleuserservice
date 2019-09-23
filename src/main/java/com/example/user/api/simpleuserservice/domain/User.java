@@ -4,8 +4,10 @@ import com.example.user.api.simpleuserservice.domain.IUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
@@ -16,7 +18,8 @@ import javax.validation.constraints.NotEmpty;
 public class User implements IUser {
 
     @Id
-    @NotEmpty
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     String id;
 
     @NotEmpty
@@ -25,4 +28,8 @@ public class User implements IUser {
     @NotEmpty
     String groupId;
 
+    public User(@NotEmpty String name, @NotEmpty String groupId) {
+        this.name = name;
+        this.groupId = groupId;
+    }
 }

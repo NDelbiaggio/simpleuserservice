@@ -49,7 +49,7 @@ public class UserControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        user = new User("id_1","user_1", "group_1");
+        user = new User("user_1", "group_1");
     }
 
     @Test
@@ -64,6 +64,7 @@ public class UserControllerTest {
 
     @Test
     public void should_find_user_by_id_succes() throws Exception {
+        user.setId("13f40c85-2d60-4b32-bfe7-7c2ce1bbdc9a");
         given((userService.findById(user.getId()))).willReturn(user);
         mockMvc.perform(get("/users/" + user.getId()))
                 .andExpect(status().isOk())
@@ -112,16 +113,6 @@ public class UserControllerTest {
         verify(userService, never()).save(user);
     }
 
-    @Test
-    public void should_400_save_with_empty_id() throws Exception {
-        user.setId("");
-        mockMvc.perform(post("/users")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(mapper.writeValueAsString(user))
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().is4xxClientError());
-        verify(userService, never()).save(user);
-    }
 
     @Test
     public void should_400_save_with_empty_name() throws Exception {
@@ -137,16 +128,17 @@ public class UserControllerTest {
 
     @Test
     public void should_delete_user_success() throws Exception {
+        user.setId("13f40c85-2d60-4b32-bfe7-7c2ce1bbdc9a");
         given((userService.delete(user.getId()))).willReturn(user);
         mockMvc.perform(delete("/users/" + user.getId()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(user.getId())))
                 .andExpect(jsonPath("$.name", is(user.getName())))
                 .andExpect(jsonPath("$.groupId", is(user.getGroupId())));
     }
 
     @Test
     public void should_404_delete_user_not_found() throws Exception {
+        user.setId("13f40c85-2d60-4b32-bfe7-7c2ce1bbdc9b");
         given((userService.delete(user.getId()))).willThrow(new EntityNotFoundException(user.getId(), User.class));
         mockMvc.perform(delete("/users/" + user.getId()))
                 .andExpect(status().is4xxClientError());
@@ -154,7 +146,7 @@ public class UserControllerTest {
 
     @Test
     public void should_save_all_users_success() throws Exception {
-        User user2 = new User("id_2","user_2","group_2");
+        User user2 = new User("user_2","group_2");
         List<User> userList = Arrays.asList(new User[]{user, user2});
         given((userService.saveAll(userList))).willReturn(userList);
         mockMvc.perform(post("/users/several")

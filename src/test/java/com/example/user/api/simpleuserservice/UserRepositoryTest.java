@@ -23,7 +23,7 @@ public class UserRepositoryTest {
 
     @Test
     public void should_find_user_by_id() {
-        User user = new User("id_1","user_name","group_1");
+        User user = new User("user_name","group_1");
         user = entityManager.persistAndFlush(user);
         assertEquals(userRepository.findById(user.getId()).get(), user);
     }
