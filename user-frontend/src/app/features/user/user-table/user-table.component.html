@@ -1,0 +1,23 @@
+<div class="container">
+    <h3>List of users</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>GroupId</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr [routerLink]="['/users', user.id]" *ngFor="let user of users$| async; let i = index">                
+                <td>{{i + 1}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.groupId}}</td>
+                <td>
+                    <button class="btn btn-danger" (click)="deleteUser(user)">delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,15 @@
+<div class="container">
+    <h3>Simple user service</h3>
+    <p>This is a simple frontend for a java spring api. The code for the frontend and the backend
+        is available on 
+        <a href="https://github.com/NDelbiaggio/simpleuserservice">Github.</a>
+    </p>
+    <p>
+        This application let you do the following:
+    </p>
+    <ul class="list-group">
+        <a *ngFor="let feature of features" [routerLink]="['/',feature.url]" >
+            <li class="list-group-item">{{feature.name}}</li>
+        </a>
+    </ul>
+</div>

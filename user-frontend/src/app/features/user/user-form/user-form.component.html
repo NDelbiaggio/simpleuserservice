@@ -1,0 +1,25 @@
+<div class="container">
+    <h3>Create new user</h3>
+    <form [formGroup]="userForm">
+        <fieldset class="form-group">
+            <input class="form-control form-control"
+                formControlName="name"
+                type="text"
+                placeholder="name" />
+        </fieldset>
+    
+        <fieldset class="form-group">
+            <input class="form-control"
+                formControlName="groupId"
+                type="text"
+                placeholder="groupid" />
+        </fieldset>
+    
+        <button [disabled]="!userForm.valid" class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
+            Save User
+        </button>
+    </form>
+</div>
+
+<app-user-table></app-user-table>
+

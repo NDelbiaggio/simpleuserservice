@@ -1,0 +1,9 @@
+.container{
+    margin-top: 1em;
+    tbody > tr{
+        cursor: pointer;
+        &:hover{
+            background-color: rgba(0,0,0,.125);
+        }
+    }
+}
