@@ -15,7 +15,7 @@
                 <td>{{user.name}}</td>
                 <td>{{user.groupId}}</td>
                 <td>
-                    <button class="btn btn-danger" (click)="deleteUser(user)">delete</button>
+                    <button class="btn btn-danger" (click)="$event.stopPropagation();deleteUser(user)">delete</button>
                 </td>
             </tr>
         </tbody>
