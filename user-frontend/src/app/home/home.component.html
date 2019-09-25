@@ -8,8 +8,12 @@
         This application let you do the following:
     </p>
     <ul class="list-group">
-        <a *ngFor="let feature of features" [routerLink]="['/',feature.url]" >
-            <li class="list-group-item">{{feature.name}}</li>
-        </a>
+        <li  
+            *ngFor="let feature of features" 
+            class="list-group-item">
+            <a [routerLink]="['/',feature.url]">
+                {{feature.name}}
+            </a>
+        </li>        
     </ul>
 </div>
